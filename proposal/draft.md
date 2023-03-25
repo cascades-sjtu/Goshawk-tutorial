@@ -6,19 +6,25 @@ TODO:
 
 ## Motivation
 
-TODO:
+Existing static analysis tools for the automated memory-related bug detection are not very effective, especially in highly customized projects and large code bases. This ineffectiveness is mainly caused by two reasons that programmer like to (1) design nested allocator for multi-object struct and (2) follow an unpaired-use model between allocators and deallocators in their developments.
 
-Existing static analysis tools for the automated memory-related bug detection are not very effective, especially in highly customized projects and large code bases.
+Things get different in 2022, when we implemented and published Goshawk on IEEE S&P 22'. Goshawk has introduced the concept of structure-aware and object-centric Memory Operation Synopsis (MOS). The MOS model abstractly describes the memory objects of a given MM function and how they are managed by the function. By utilizing MOS, we are capable of handling the above two development characteristics while exploring much less code.
 
-Based on above discussion, we conclude the following three motivations of our tutorial:
-
-Proposals must provide an in-depth and contemporary survey of the chosen area and cover the related literature.
+We conducted a comprehensive test on OSS projects such as Linux kernel, OpenSSL and IoT SDKs and compared with other SOTA data-flow driven bug detection prototype, such as ClangStaticAnalyzer Malloc checker, K-MELD and SinkFinder. As a result, Goshawk outperforms those tools by an order of magnitude in speed and accuracy. By the time of publication, Goshawk has detected 92 new double-free and use-after-free bugs and reported them with developer-friendly MOS descriptions.
 
 Goshawk is constantly evolving after it has been published. Technically, we have keep maintained Goshawk to Clang-15. Consequently, we have applied Goshawk to a wider range of softwares and get more surprising results.
+
+Based on above introduction, we conclude the following three motivations of our tutorial:
+
+TODO:
 
 ### New version of Goshawk
 
 ### New findings with Goshawk
+
+TODO:
+
+In a nutshell, we believe it's time for goshawk to show itself again on the global stage!
 
 ## Objectives
 
