@@ -30,6 +30,8 @@ Consequently, we have applied Goshawk to a wider range of softwares and get more
 
 We have been continuously finding new bugs with Goshawk and comfirming their detials with developers. Once approved, we can show the step-by-step process of uncovering those vulnerabilities to every audience of this tutorial.
 
+TODO: add detailed description of new bugs
+
 In a nutshell, we believe it's time for goshawk to showcase itself once again on the world stage!
 
 ## Objectives
@@ -55,24 +57,35 @@ The above two problems are especially obvious when facing large projects, but Go
 
 We assume this tutorial is beneficial for the following three types of audience:
 
-1. Who wants to learn the internal of C/C++ static analysis for memory-related issues
-2. Who wants to get familiar with the ClangStaticAnalyzer and its idiomatic usage
-3. Who wants to integrate security analysis into their development workflow, especially for large project
+1. Who wants to learn the internal of C/C++ static analysis for memory-related issues;
+2. Who wants to get familiar with the ClangStaticAnalyzer and its idiomatic usage;
+3. Who wants to integrate security analysis into their development workflow, especially for large project.
 
 ## Outline
 
-TODO:
-
 Below is the timeline of our tutorial, about 90 minutes in total:
 
-1. 5' preparation: distribute our prebuilt Goshawk docker image for later interactive activity
-2. 30' introduction: introduce Goshawk and its internal implementation
-3. 10' demo: show Goshawk's basic usage for finding memory-related bugs in prepared buggy program
-4. 20' interactive activity: ask audiences to try to find memory-related bugs by themselves in our provided 90 projects, there will be tutorial assistants in the auditorium to help answer questions
-5. 10' collaborative review: collect the output of Goshawk from each audience and review them together, those who find memory-related bugs can get rewards
-6. 5' comparison: compare the results with the results of the static analysis using the vanilla ClangStaticAnalyzer
-7. 10' extension: show how to further modify and extend Goshawk to your security research
-8. Q&A
+| Order | Duration | Activity | Content |
+| ----- | -------- | -------- | ------- |
+| 1 | 5'  | Preparation  | Distribute our prebuilt Goshawk docker image |
+| 2 | 30' | Introduction | Introduce Goshawk and its internal implementation |
+| 3 | 10' | Demo         | Show Goshawk's basic usage for finding memory-related bugs |
+| 4 | 20' | Interaction  | Ask audiences to try to find memory-related bugs by themselves |
+| 5 | 10' | Co-review    | Collect the output of Goshawk from each audience and review them together |
+| 6 | 5'  | Comparison   | Compare the results with the ClangStaticAnalyzer's Malloc checker |
+| 7 | 10' | Extension    | Show how to further modify and extend Goshawk to your security research |
+| 8 | NaN | Q&A |  |
+
+Below is some detailed description:
+
+1. We will upload docker image to DockerHub. Audiences are required to download it and create its container for later interactive activity;
+2. We will briefly introduce Goshawk's principle and mainly focus on the project structure;
+3. We will show Goshawk's basic usage taking a prepared real-world buggy program as an example. Then we show the intermediate output and analysis results;
+4. Audiences will try to find bugs by themselves in our provided 90 projects, the majority of which are OpenWrt's authentication and networking software packages. There will be tutorial assistants in the auditorium to help answer questions;
+5. We will analyze those 90 projects in advance. For those easily comfirmed bugs, we will reward their finders; For those implicit bugs, we will confirm them with finders after the tutorial;
+6. We will analyze those 90 projects using ClangStaticAnalyzer's Malloc checker and compare them in advance, only the difference are shown in tutorial;
+7. We will show how to design their own MOS model to identifying cryptography function. If time permits, we will show the comparison between our MOS model and ChatGPT;
+8. We will answer questions about Goshawk's usage and other related topics.
 
 ## Speaker
 
