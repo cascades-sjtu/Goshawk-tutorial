@@ -6,9 +6,9 @@ TODO:
 
 ## Motivation
 
-Existing static analysis tools for the automated memory-related bug(Double Free, Use-After-Free, etc) detection are not very effective, especially in highly customized projects and large code bases. This ineffectiveness is mainly caused by the following two reasons: programmer likes to (1) design nested allocator for multi-object struct and (2) follow an unpaired-use model between allocators and deallocators.
+Existing static analysis tools for the automated memory-related bug(Double Free, Use-After-Free, etc) detection are not very effective, especially in highly customized projects and large code bases. This ineffectiveness is mainly caused by the following two reasons: programmer likes to (1) design non-standard nested allocator for multi-object struct and (2) follow an unpaired-use model between allocators and deallocators.
 
-Things get different in 2022, when we implemented and published the bug detection prototype-Goshawk[^paper] on IEEE S&P 22'. Goshawk has introduced the concept of structure-aware and object-centric Memory Operation Synopsis (MOS). The MOS model abstractly describes the memory objects of a given MM function and how they are managed by the function. By utilizing MOS, Goshawk are capable of handling the above two development characteristics while exploring much less code.
+Things get different in 2022, when we implemented and published the bug detection prototype-Goshawk[^paper] on IEEE S&P 22'. Goshawk has introduced the concept of structure-aware and object-centric Memory Operation Synopsis (MOS). The MOS model abstractly describes the memory objects of a given MM function and how they are managed by the function. By utilizing MOS, Goshawk are capable of handling the above two development characteristics (achieve accuracy) while exploring much less code (achieve efficiency).
 
 We conducted a comprehensive test on OSS projects such as OS kernel, OpenSSL and IoT SDKs and compared with other SOTA data-flow driven bug detection prototype, such as ClangStaticAnalyzer Malloc checker[^csa], K-MELD[^kmeld] and SinkFinder[^sinkfinder]. As a result, Goshawk outperforms those tools by an order of magnitude in speed and accuracy. By the time of publication, Goshawk has detected 92 new double-free and use-after-free bugs and reported them with developer-friendly MOS descriptions.
 
@@ -18,9 +18,9 @@ Based on the above discussion, we conclude the following three motivations of ou
 
 ### New version of Goshawk
 
-Technically speaking, the initial version of Goshawk has a two-stage working process: (1) memory-management function and MOS annotation and (2) ClangStaticAnalyzer-based bug detection. Between the two stage, user must keep the intermediate output and call Codechecker in command line manually, which is not very convinient and error-prone for novices. The latest version of Goshawk combines the two stages into one script [run.py](https://github.com/Yunlongs/Goshawk/blob/master/run.py) and can directly view the analysis results.
+Technically speaking, the initial version of Goshawk has a two-stage working process: (1) memory-management function and MOS annotation and (2) Data-flow analysis based bug detection on those functions. Between the two stage, user must keep the intermediate output and call Codechecker in command line manually, which is not very convinient and error-prone for novices. The latest version of Goshawk combines the two stages into one script [run.py](https://github.com/Yunlongs/Goshawk/blob/master/run.py) and can directly view the analysis results.
 
-We also update its functionality of each stage. As for the first stage, Goshawk has provided some custom functionalities. Users can [re-train Simaese network](https://github.com/Yunlongs/Goshawk#ⅲb-re-train-simaese-network-for-your-customized-target-function-identification-task-egmm-functions-crypto-functions) for their customized target function identification task and use that model for inferring similarities between function prototypes. This work greatly expands the capabilities of Goshawk, making it no longer limited to memory management functions, but can also handle crypto functions.
+We also update its functionality of each stage. As for the first stage, Goshawk has provided some custom functionalities. Users can [re-train Siamese network](https://github.com/Yunlongs/Goshawk#ⅲb-re-train-simaese-network-for-your-customized-target-function-identification-task-egmm-functions-crypto-functions) for their customized target function identification task and use that model for inferring similarities between function prototypes. This work greatly expands the capabilities of Goshawk, making it no longer limited to memory management functions.
 
 As for the second stage, we have ported the [ClangStaticAnalyzer checker plugin](https://github.com/Yunlongs/Goshawk/tree/master/plugins_src) in Goshawk to Clang-15.0.0 for supporting modern C/C++ projects, and re-organized the four checker into one entry checker [GoshawkAnalyzer](https://github.com/Yunlongs/Goshawk/tree/master/plugins_src/GoshawkAnalyzer).
 
@@ -34,13 +34,22 @@ In a nutshell, we believe it's time for goshawk to showcase itself once again on
 
 ## Objectives
 
-TODO:
+This tutorial is expected to address two technical issues with Goshawk.
 
-### apply language model to bug detection
+### Apply NLP model to bug detection
 
-### apply open-source tool to real-world bugs
+One of the most innovative idea of Goshawk is the MOS model. From the point of view of its implementation, it is actually a NLP model for identifying function prototypes. While Goshawk just proved its worth in identifying memory functions, we will show in this tutorial how to apply it to other funtions with nested feature, such as cryptography-related and network-related functions. Then we will be able to discover bugs like crypto-misuse or command-injection.
 
-A description of the technical issues that the tutorial will address.
+In addition, the widely popular ChatGPT, currently trending, is also a language. While [Some people](https://github.com/chris-koch-penn/gpt3_security_vulnerability_scanner) have already made attempts to use ChatGPT in discovering trival vulnerability test suites, what about integrate it into Goshawk's function prototype finding process? We will show the performance of ChatGPT in that task.
+
+### Apply open-source SAST tool to real-world projects
+
+We already have got a lot of great C/C++ static application security testing (SAST) tools, but as the empirical study[^sast] says, 66% of their invesgated GitHub projects define how to use specific SASTs but only 37% enforce their usage for new contributions. This is mainly because of the following two reasons:
+
+1. Open-source SASTs reports a high (47-80%) rate of FP/NP [^issta], increased the burden of developers;
+2. Open-source SASTs are not customized for projects, thus it needs to be configured manually in order for the tools to work effectively.
+
+The above two problems are especially obvious when facing large projects, but Goshawk can easily solve them: (1) The MOS model are built automatically, users only need to provide the initial corpus of function prototypes to obtain a project-specific MOS model. (2) Goshawk uses ClangStaticAnalyzer as its analysis engine, which is part of the [Clang](https://clang.llvm.org) compiler infrastructure. (3) Goshawk only performs data-flow analysis on those interested functions and prunes other irrelavant functions. (4) Goshawk uses [Z3 Solver](https://github.com/Z3Prover/z3) to eliminate false warnings due to infeasible paths.
 
 ## Target Audience
 
@@ -51,6 +60,8 @@ We assume this tutorial is beneficial for the following three types of audience:
 3. Who wants to integrate security analysis into their development workflow, especially for large project
 
 ## Outline
+
+TODO:
 
 Below is the timeline of our tutorial, about 90 minutes in total:
 
@@ -82,3 +93,5 @@ Below is the timeline of our tutorial, about 90 minutes in total:
 [^github]: https://github.com/Yunlongs/Goshawk
 [^website]: https://goshawk.code-analysis.org
 [^buglist]: https://github.com/Yunlongs/Goshawk/blob/master/bug_list.md
+[^sast]: https://link.springer.com/article/10.1007/s10664-019-09750-5
+[^issta]: https://dl.acm.org/doi/10.1145/3533767.3534380
