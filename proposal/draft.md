@@ -26,11 +26,9 @@ As for the second stage, we have ported the [ClangStaticAnalyzer checker plugin]
 
 ### New findings with Goshawk
 
-Consequently, we have applied Goshawk to a wider range of softwares and get more surprising results. In addition to the vulnerabilities already listed on the buglist[^buglist], we have discovered UAF bugs in [nasm-2.15.05](https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/nasm-2.15.05.tar.xz), [cairo-1.17.4]( https://cairographics.org/snapshots/cairo-1.17.4.tar.xz), [flite](https://github.com/festvox/flite) and two OpenWrt pacakges: [libcoap-4.2.1](https://github.com/obgm/libcoap/releases/tag/v4.2.1), [kplex-1.4](https://github.com/stripydog/kplex/releases/tag/v1.4).
+Consequently, we have applied Goshawk to a wider range of softwares and get more surprising results. In addition to the vulnerabilities already listed on the buglist[^buglist], we have discovered UAF bugs in general user programs, like [nasm-2.15.05](https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/nasm-2.15.05.tar.xz), [cairo-1.17.4]( https://cairographics.org/snapshots/cairo-1.17.4.tar.xz), [flite](https://github.com/festvox/flite). We also discovered 15 bugs (13 UAFs and 2 Double Frees)  in 90 OpenWrt pacakges, like [libcoap-4.2.1](https://github.com/obgm/libcoap/releases/tag/v4.2.1), [kplex-1.4](https://github.com/stripydog/kplex/releases/tag/v1.4), and we manually confirm them. Generally speaking, the average length of bug's data-flow trace is 16.86, which is hard to explore manually.
 
 We have been continuously finding new bugs with Goshawk and comfirming their detials with developers. Once approved, we can show the step-by-step process of uncovering those vulnerabilities to every audience of this tutorial.
-
-TODO: add detailed description of new bugs
 
 In a nutshell, we believe it's time for goshawk to showcase itself once again on the world stage!
 
@@ -93,8 +91,8 @@ Below is some detailed description:
   * affliation: Shanghai Jiao Tong University / Shanghai Qizhi Institute
   * biography: Received a bachelor's degree in information security from Shanghai Jiao Tong University in 2021 and is currently pursuing a master's degree in cyber security. Research interests are static program analysis.
   * past/relavant experience related on the topic of the tutorial:
-    * Worked as an intern at Shanghai Feiyu Information Technology Co., Ltd, implementing ClangStaticAnalyzer checkers for secure coding standards
-    * Worked as a teaching assistant in NIS-7021 and IS-308, instructing students to use ClangStaticAnalyzer and Goshawk in bug-detection homework
+    * Worked as an intern at Shanghai Feiyu Information Technology Co., Ltd, implementing ClangStaticAnalyzer checkers for secure coding standards;
+    * Worked as a teaching assistant in NIS-7021 and IS-308, instructing students to use ClangStaticAnalyzer and Goshawk in bug-detection homework;
   * previous tutorial experience: No
 
 ## Reference
