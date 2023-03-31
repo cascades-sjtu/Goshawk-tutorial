@@ -1,4 +1,4 @@
-# Goshawk's glance back
+# Custom Memory Functions Demystified: A tutorial of memory corruptions detection using Goshawk
 
 ## Abstract
 
