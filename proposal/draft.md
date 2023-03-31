@@ -84,8 +84,11 @@ Below is some detailed description:
 ## Speaker
 
 * Xiang Chen
-  * affliation: Shanghai Jiao Tong University / Shanghai Qizhi Institute
-  * biography: Major in information security (master degree) at Shanghai Jiao Tong University and as a member of [G.O.S.S.I.P](https://gossip.team), Xiang Chen is now focusing on applying static program analysis to find bugs effectively in real world projects. He is one of the current maintainers of the [Goshawk project](https://goshawk.code-analysis.org).
+  * affiliation: Shanghai Jiao Tong University / Shanghai Qizhi Institute
+  * biography: Major in cyber security (master degree) at Shanghai Jiao Tong University and as a member of [G.O.S.S.I.P](https://gossip.team), Xiang Chen is now focusing on applying static program analysis to find bugs effectively in real world projects. He is one of the current maintainers of the [Goshawk project](https://goshawk.code-analysis.org).
+* Siqi Ma
+  * affiliation: The University of New South Wales
+  * biography: Siqi Ma is currently the senior lecturer of the University of New South Wales. She mainly works in the area of software security. She has published over 40 papers to the top conferences in the areas of cybersecurity and software engineering, such as Security & Privacy, Usenix Security, International Conference and Software Engineering.
 
 ## Reference
 
