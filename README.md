@@ -21,4 +21,4 @@ The static analysis identifies bugs without running the code. However, to find b
 
 ## Publication
 
-This tutorial has been published on the [ACM AsiaCCS 2023 official website](https://asiaccs2023.org/program/confirmed_tutorials/)
+This tutorial has been published on the [ACM AsiaCCS 2023 official website](https://asiaccs2023.org/program/confirmed_tutorials/). Hope to see you in Melbourne Australia from July 10th to July 14th, 2023.
